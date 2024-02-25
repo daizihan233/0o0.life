@@ -56,8 +56,8 @@ function relax() {
   display: none;
 }
 .display {
-  padding-left: 80px;
-  padding-right: 80px;
+  padding-left: 24px;
+  padding-right: 24px;
   text-align: center;
 }
 </style>
