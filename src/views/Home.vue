@@ -1,6 +1,6 @@
 <script setup>
-
-import {NButton, NResult} from "naive-ui";
+import {NResult} from "naive-ui";
+document.title = "你温暖而熟悉的家，最可信的地方 - 主页"
 </script>
 
 <template>
