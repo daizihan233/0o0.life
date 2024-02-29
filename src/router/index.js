@@ -1,5 +1,4 @@
 import {createRouter, createWebHistory} from "vue-router";
-import HelloWorld from "../views/HelloWorld.vue";
 
 const router = createRouter(
     {
@@ -18,7 +17,7 @@ const router = createRouter(
             {
                 path: '/HelloWorld',
                 name: 'HelloWorld',
-                component: HelloWorld
+                component: () => import("../views/HelloWorld.vue")
             },
             {
                 path: '/:pathMatch(.*)*',
