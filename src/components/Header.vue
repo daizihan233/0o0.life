@@ -1,5 +1,5 @@
 <template>
-  <n-menu :options="menuOptions" mode="horizontal" />
+  <n-menu :options="menuOptions" mode="horizontal"/>
   <n-divider title-placement="right">
     0o0.life
   </n-divider>
@@ -11,7 +11,8 @@ import { NIcon, NMenu, NDivider } from "naive-ui";
 import { RouterLink } from "vue-router";
 import {
   HomeOutline as HomeIcon,
-  LogOutOutline as GoIcon
+  LogOutOutline as GoIcon,
+  ApertureOutline as IdeaIcon
 } from "@vicons/ionicons5";
 
 function renderIcon(icon) {
@@ -44,6 +45,19 @@ const menuOptions = [
     ),
     key: "go-to-about",
     icon: renderIcon(GoIcon)
+  },
+  {
+    label: () => h(
+        RouterLink,
+        {
+          to: {
+            name: "Idea"
+          }
+        },
+        { default: () => "找找灵感" }
+    ),
+    key: "go-to-idea",
+    icon: renderIcon(IdeaIcon)
   }
 ];
 </script>

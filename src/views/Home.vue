@@ -1,9 +1,11 @@
 <script setup>
 import {NResult} from "naive-ui";
-document.title = "你温暖而熟悉的家，最可信的地方 - 主页"
+import Tips from "../components/Tips.vue";
+document.title = "主页 - 你温暖而熟悉的家，最可信的地方"
 </script>
 
 <template>
+  <Tips title="路牌 - 主页" text="一天结束了吗？来这里，好好休息一下。" type="success"></Tips>
   <n-result
       status="403"
       title="走吧"
