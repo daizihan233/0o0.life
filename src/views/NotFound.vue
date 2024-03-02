@@ -1,6 +1,5 @@
 <script setup>
 import { NResult } from 'naive-ui'
-import Talk from "../components/Talk.vue";
 import Tips from "../components/Tips.vue";
 document.title = "404 - 一片荒无人烟的地方，像是异世界"
 </script>
