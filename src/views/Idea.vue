@@ -2,6 +2,7 @@
 import { NPagination } from "naive-ui";
 import {ref} from "vue";
 import Tips from "../components/Tips.vue";
+import LikeButton from "../components/LikeButton.vue";
 
 document.title = "想法 - 这里欢迎每一个想法，不管是什么"
 
@@ -46,9 +47,9 @@ const result = {  // 假装这是一段 API 返回的数据
 <template>
   <Tips title="路牌 - 想法" text="这里欢迎每一个想法，不管是什么。哪怕是无聊的、荒诞的、抽象的、虚无的…… 每一个想法，同样也包括问题。" type="success"></Tips>
   <div class="center">
-    <div v-for="(resp, i) in result['data']" class="content">
+    <div v-for="(resp) in result['data']" class="content">
       <h3 class="text">{{ resp.title }}</h3>
-
+      <LikeButton :like="resp.like" :dislike="resp.dislike"></LikeButton>
     </div>
     <n-pagination v-model:page="page" :page-count="result['page']" show-quick-jumper>
       <template #prev>
