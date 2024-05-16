@@ -28,7 +28,6 @@ function relax() {
   <div :class="c">
     <n-divider></n-divider>
     <Tips title="路牌 - 彩蛋" text="这里是开发者埋下的一个小彩蛋…… 嘘！不要告诉别人！" type="success"></Tips>
-    <n-divider />
     停！你是怎么找到这里的？让我猜猜，你是……<br>
     <n-tabs type="segment" animated>
       <n-tab-pane name="chap1" tab="谁？">

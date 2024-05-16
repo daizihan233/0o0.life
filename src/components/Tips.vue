@@ -1,5 +1,5 @@
 <script setup>
-import { NSpace, NAlert } from 'naive-ui'
+import { NSpace, NAlert, NDivider } from 'naive-ui'
 </script>
 
 <script>
@@ -14,7 +14,5 @@ export default {
       {{ text }}
     </n-alert>
   </n-space>
+  <NDivider></NDivider>
 </template>
-
-<style scoped>
-</style>

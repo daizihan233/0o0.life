@@ -25,9 +25,14 @@ const router = createRouter(
                 component: () => import("../views/Idea.vue")
             },
             {
-                path: '/:pathMatch(.*)*',
+                path: '/404',
                 name: '404',
                 component: () => import("../views/NotFound.vue")
+            },
+            {
+                path: '/:pathMatch(.*)',
+                name: 'NotFound',
+                redirect: '/404'
             }
         ]
     }
