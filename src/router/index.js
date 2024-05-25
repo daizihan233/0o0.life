@@ -25,6 +25,11 @@ const router = createRouter(
                 component: () => import("../views/Idea.vue")
             },
             {
+                path: '/privacy',
+                name: 'Privacy',
+                component: () => import("../views/Privacy.vue")
+            },
+            {
                 path: '/404',
                 name: '404',
                 component: () => import("../views/NotFound.vue")

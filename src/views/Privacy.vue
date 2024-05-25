@@ -1,16 +1,16 @@
 <script setup>
-
 import Tips from "../components/Tips.vue";
 import Talk from "../components/Talk.vue";
+document.title = "隐私政策 - 了解你的信息会被如何处理"
 </script>
 
 <template>
   <Tips title="路牌 - 隐私政策" text="了解你的信息会被如何处理" type="success"></Tips>
-  <div class="center">
-    <h1>收集什么？</h1>
-    <p>网站会收集你设备或网络环境的<b>部分特征</b>，具体见下：</p>
-    <h2>IP</h2>
-    <p>IP 是一种类似于</p>
-  </div>
+  <div class="centerDiv">
+    <img src="../assets/Privacy.png" alt="隐私政策概述图"/>
+    <p>
+      以上是本站点将会收集的个人信息，除此之外，本站还会在登陆后使用 <b>Cookie</b> 来 <b>保持</b> 登陆状态
+    </p>
     <Talk></Talk>
+  </div>
 </template>

@@ -12,7 +12,8 @@ import { RouterLink } from "vue-router";
 import {
   HomeOutline as HomeIcon,
   LogOutOutline as GoIcon,
-  ApertureOutline as IdeaIcon
+  ApertureOutline as IdeaIcon,
+  FingerPrintOutline as PrivacyIcon
 } from "@vicons/ionicons5";
 
 function renderIcon(icon) {
@@ -58,6 +59,19 @@ const menuOptions = [
     ),
     key: "go-to-idea",
     icon: renderIcon(IdeaIcon)
+  },
+  {
+    label: () => h(
+        RouterLink,
+        {
+          to: {
+            name: "Privacy"
+          }
+        },
+        { default: () => "隐私政策" }
+    ),
+    key: "go-to-privacy",
+    icon: renderIcon(PrivacyIcon)
   }
 ];
 </script>
