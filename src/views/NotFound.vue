@@ -15,6 +15,6 @@ document.title = "404 - 一片荒无人烟的地方，像是异世界"
   </n-result>
   <div class="center">
     ↓↓↓ 或者寻求帮助（告诉“开发者”你是如何来到这的） ↓↓↓
+    <Talk></Talk>
   </div>
-  <Talk></Talk>
 </template>
