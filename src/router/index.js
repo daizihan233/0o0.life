@@ -20,14 +20,9 @@ const router = createRouter(
                 component: () => import("../views/HelloWorld.vue")
             },
             {
-                path: '/idea',
-                name: 'Idea',
-                component: () => import("../views/Idea.vue")
-            },
-            {
-                path: '/privacy',
-                name: 'Privacy',
-                component: () => import("../views/Privacy.vue")
+                path: '/self',
+                name: 'self',
+                component: () => import("../views/HelloWorld.vue")
             },
             {
                 path: '/404',
