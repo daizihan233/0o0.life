@@ -46,32 +46,6 @@ const menuOptions = [
     ),
     key: "go-to-about",
     icon: renderIcon(GoIcon)
-  },
-  {
-    label: () => h(
-        RouterLink,
-        {
-          to: {
-            name: "Idea"
-          }
-        },
-        { default: () => "找找灵感" }
-    ),
-    key: "go-to-idea",
-    icon: renderIcon(IdeaIcon)
-  },
-  {
-    label: () => h(
-        RouterLink,
-        {
-          to: {
-            name: "Privacy"
-          }
-        },
-        { default: () => "隐私政策" }
-    ),
-    key: "go-to-privacy",
-    icon: renderIcon(PrivacyIcon)
   }
 ];
 </script>
