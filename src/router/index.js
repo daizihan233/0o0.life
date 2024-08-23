@@ -22,7 +22,7 @@ const router = createRouter(
             {
                 path: '/self',
                 name: 'self',
-                component: () => import("../views/HelloWorld.vue")
+                component: () => import("../views/Self.vue")
             },
             {
                 path: '/404',
