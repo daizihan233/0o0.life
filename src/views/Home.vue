@@ -12,11 +12,14 @@ import {
   NInputNumber,
   NSlider,
   NSwitch,
-  NTransfer
+  NTransfer,
+  useDialog,
+  useMessage
 } from 'naive-ui';
 
 document.title = "主页 - 你温暖而熟悉的家，最可信的地方"
-
+const dialog = useDialog()
+const message = useMessage()
 const formRef = ref(null);
 const cerr = [
   // 10 种认知扭曲（翻译有改动）
@@ -59,6 +62,43 @@ let model = ref({
 function commit(e) {
   e.preventDefault();
   console.log(model.value)
+  if (hasFun.value && !hasBad.value) {  // 全是趣事
+    dialog.success({
+      title: "成功",
+      content: "今天真是个美好的一天！",
+      positiveText: "太棒了！",
+      onPositiveClick: () => {
+        message.success("继续保持这种好心情！");
+      }
+    });
+  } else if (hasFun.value && hasBad.value) {  // 有好有坏
+    dialog.success({
+      title: "成功",
+      content: "今天有点糟糕呢……",
+      positiveText: "加油！",
+      onPositiveClick: () => {
+        message.success("明天会更好！");
+      }
+    });
+  } else if (!hasFun.value && hasBad.value) {  // 全是坏事
+    dialog.success({
+      title: "成功",
+      content: "今天有点起伏，但你依然坚持了下来！",
+      positiveText: "继续努力！",
+      onPositiveClick: () => {
+        message.success("每一天都是新的挑战！");
+      }
+    });
+  } else {  // 无事发生
+    dialog.success({
+      title: "成功",
+      content: "今天是个平静的一天，享受这份宁静吧！",
+      positiveText: "放松一下！",
+      onPositiveClick: () => {
+        message.success("有时候平淡也是一种幸福！");
+      }
+    });
+  }
   // TODO: 提交信息至后端
 }
 </script>
@@ -159,5 +199,4 @@ function commit(e) {
       </div>
     </n-form>
   </div>
-  <pre>{{ JSON.stringify(model, null, 2) }}</pre>
 </template>

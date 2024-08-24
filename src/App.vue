@@ -1,7 +1,11 @@
 <script setup>
 import Header from "./components/Header.vue";
 import Aegis from 'aegis-web-sdk';
+import {darkTheme, NDialogProvider, NMessageProvider, useOsTheme} from "naive-ui";
+import {computed} from "vue";
 
+const osThemeRef = useOsTheme();
+let theme = computed(() => osThemeRef.value === "dark" ? darkTheme : null);
 if (document.location.host === "0o0.life") {
   const aegis = new Aegis({
     id: '9GDpnILXZXGdP3z8e9', // 上报 id
@@ -14,6 +18,12 @@ if (document.location.host === "0o0.life") {
 </script>
 
 <template>
-  <Header />
-  <router-view></router-view>
+  <n-config-provider :theme="theme" date-locale="dateZhCN" locale="zhCN">
+    <n-message-provider>
+      <n-dialog-provider>
+        <Header/>
+        <router-view></router-view>
+      </n-dialog-provider>
+    </n-message-provider>
+  </n-config-provider>
 </template>
