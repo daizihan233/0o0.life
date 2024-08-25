@@ -9,7 +9,6 @@ import {
   NForm,
   NFormItem,
   NInput,
-  NInputNumber,
   NSlider,
   NSwitch,
   NTransfer,
@@ -34,7 +33,65 @@ const cerr = [
       value: v
     })
 )
-let hasFun = ref(true), hasBad = ref(false), evaluate = ref("真棒的一天！")
+
+
+let hasFun = ref(false), hasBad = ref(false), evaluate = ref("真棒的一天！")
+// noinspection JSUnusedGlobalSymbols
+let rules = {
+  datetimeValue: {
+    type: "number",
+    required: true,
+    message: '时光机需要燃料——日期，快给它加满！',
+    trigger: ['blur', 'change']
+  },
+  emotionalTags: {
+    type: "array",
+    required: true,
+    message: '心情标签是心灵的彩虹，添加一个点亮今天吧！',
+    trigger: ['blur', 'change']
+  },
+  todayFunStories: {
+    required: hasFun.value,
+    message: '有什么趣事？分享出来，让世界多一份笑声！',
+    trigger: ['blur', 'input']
+  },
+  todayBadStories: {
+    required: hasBad.value,
+    message: '坏心情？说出来，让它们随风而去！',
+    trigger: ['blur', 'input']
+  },
+  transpositionalConsideration: {
+    required: hasBad.value,
+    message: '换个角度看世界，或许会有意想不到的风景哦！',
+    trigger: ['blur', 'input']
+  },
+  todayRate: {
+    validator(rule, value) {
+      return 0 <= value <= 100;
+    },
+    required: true,
+    message: '给自己的一天打个分，记录下此刻的心情吧！',
+    trigger: ['blur', 'change']
+  },
+  cognitiveErrors: {
+    type: "array",
+    required: hasBad.value,
+    message: '认知迷雾？用智慧的明灯照亮前方！',
+    trigger: ['blur', 'change']
+  },
+  praisingOneself: {
+    required: true,
+    message: '每天都要夸夸自己，毕竟你是这个世界的独一无二！',
+    trigger: ['blur', 'input']
+  },
+  wantToKnow: {
+    required: false,
+    message: '好奇心是知识的种子，有什么想知道的吗？',
+    trigger: ['blur', 'input']
+  }
+}
+
+
 
 function updateEvaluate() {
   if (hasFun.value && !hasBad.value) {  // 全是趣事
@@ -46,6 +103,11 @@ function updateEvaluate() {
   } else {  // 无事发生
     evaluate.value = "今天是个平静的一天，给自己一个放松的时刻！"
   }
+  // 刷新 rules
+  rules.todayFunStories.required = hasFun.value
+  rules.todayBadStories.required = hasBad.value
+  rules.transpositionalConsideration.required = hasBad.value
+  rules.cognitiveErrors.required = hasBad.value
 }
 
 let model = ref({
@@ -56,12 +118,28 @@ let model = ref({
   transpositionalConsideration: null,
   todayRate: 50,
   cognitiveErrors: null,
-  praisingOneself: null
+  praisingOneself: null,
+  wantToKnow: null
 })
 
-function commit(e) {
+async function commit(e) {
   e.preventDefault();
   console.log(model.value)
+  let isValid = false;
+  // noinspection JSUnresolvedReference
+  await formRef.value?.validate((errors) => {
+    if (!errors) {
+      isValid = true;
+    } else {
+      console.log(errors);
+      message.error("表单验证遇到了一些小插曲，请检查并修正所有标记的错误，让我们继续前行吧！");
+    }
+  });
+
+  if (!isValid) {
+    return; // 结束 commit 函数
+  }
+  // TODO: 提交信息至后端
   if (hasFun.value && !hasBad.value) {  // 全是趣事
     dialog.success({
       title: "成功",
@@ -99,7 +177,6 @@ function commit(e) {
       }
     });
   }
-  // TODO: 提交信息至后端
 }
 </script>
 
@@ -109,6 +186,7 @@ function commit(e) {
     <n-form
         ref="formRef"
         :model="model"
+        :rules="rules"
         label-placement="top"
         label-width="auto"
         require-mark-placement="right-hanging"
@@ -164,7 +242,6 @@ function commit(e) {
       </n-form-item>
       <n-form-item label="总的来说今天怎么样呢？打个分吧！" path="todayRate">
         <n-slider v-model:value="model.todayRate" :step="1"/>
-        <n-input-number v-model:value="model.todayRate" size="small"/>
       </n-form-item>
       <Tips :text="evaluate" title="🤔今天可真是……" type="info"></Tips>
       <n-form-item label="为你的消极想法找一种不同的角度吧" path="transpositionalConsideration">
@@ -181,7 +258,7 @@ function commit(e) {
       <n-form-item label="我的认知可能是……" path="cognitiveErrors">
         <n-transfer v-model:value="model.cognitiveErrors" :disabled="!hasBad" :options="cerr"/>
       </n-form-item>
-      <NDivider></NDivider>
+      <NDivider/>
       <n-form-item label="又过了一天，不论如何，夸夸自己吧~" path="praisingOneself">
         <n-input
             v-model:value="model.praisingOneself"
@@ -192,6 +269,17 @@ function commit(e) {
             type="textarea"
         />
       </n-form-item>
+      <n-form-item label="有什么想知道的吗？或者感悟？" path="wantToKnow">
+        <n-input
+            v-model:value="model.wantToKnow"
+            :autosize="{
+              minRows: 3
+            }"
+            placeholder="Textarea"
+            type="textarea"
+        />
+      </n-form-item>
+      <NDivider/>
       <div style="display: flex; justify-content: flex-end">
         <n-button round type="primary" @click="commit">
           提交
